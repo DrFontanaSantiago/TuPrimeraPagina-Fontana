@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1 class="text-center">Bienvenido al Recetario de Santi</h1>
+<p class="text-center">Realiza una búsqueda general:</p>
+
+<form method="get" action="{% url 'inicio' %}" class="d-flex justify-content-center mb-4">
+    <input type="text" name="buscar" class="form-control w-50 me-2" placeholder="Buscar...">
+    <button type="submit" class="btn btn-primary">Buscar</button>
+</form>
+
+{% if resultados_recetas or resultados_bebidas or resultados_tips %}
+    <h2 class="text-center">Resultados de la búsqueda</h2>
+
+    <h3>Recetas</h3>
+    <ul>
+        {% for receta in resultados_recetas %}
+        <li><a href="{% url 'detalle_receta' receta.id %}">{{ receta.titulo }}</a></li>
+        {% empty %}
+        <li>No se encontraron recetas.</li>
+        {% endfor %}
+    </ul>
+
+    <h3>Bebidas</h3>
+    <ul>
+        {% for bebida in resultados_bebidas %}
+        <li><a href="{% url 'listar_bebidas' %}">{{ bebida.titulo }}</a></li>
+        {% empty %}
+        <li>No se encontraron bebidas.</li>
+        {% endfor %}
+    </ul>
+
+    <h3>Tips</h3>
+    <ul>
+        {% for tip in resultados_tips %}
+        <li><a href="{% url 'listar_tips' %}">{{ tip.titulo }}</a></li>
+        {% empty %}
+        <li>No se encontraron tips.</li>
+        {% endfor %}
+    </ul>
+{% endif %}
+{% endblock %}

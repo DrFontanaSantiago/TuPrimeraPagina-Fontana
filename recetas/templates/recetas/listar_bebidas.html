@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1 class="text-center">Bebidas</h1>
+<div class="row">
+    {% for bebida in bebidas %}
+    <div class="col-md-4 mb-4">
+        <div class="card">
+            {% if bebida.imagen %}
+            <img src="{{ bebida.imagen.url }}" class="card-img-top" alt="Imagen de {{ bebida.titulo }}">
+            {% endif %}
+            <div class="card-body">
+                <h5 class="card-title">{{ bebida.titulo }}</h5>
+                <p class="card-text">{{ bebida.descripcion }}</p>
+                <p><strong>Categoría:</strong> {{ bebida.get_categoria_display }}</p>
+            </div>
+        </div>
+    </div>
+    {% empty %}
+    <p class="text-center">No hay bebidas disponibles.</p>
+    {% endfor %}
+</div>
+{% endblock %}

@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Recetas en la categoría: {{ categoria.nombre }}</h1>
+<ul>
+    {% for receta in recetas %}
+    <li>
+        <a href="{% url 'detalle_receta' receta.id %}">{{ receta.titulo }}</a> - {{ receta.descripcion }}
+    </li>
+    {% empty %}
+    <li>No hay recetas en esta categoría.</li>
+    {% endfor %}
+</ul>
+<a href="{% url 'listar_recetas' %}">Volver a todas las recetas</a>
+{% endblock %}

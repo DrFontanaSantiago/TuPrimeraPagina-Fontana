@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="card mb-4">
+    {% if receta.imagen %}
+    <img src="{{ receta.imagen.url }}" class="card-img-top" alt="Imagen de {{ receta.titulo }}">
+    {% endif %}
+    <div class="card-body">
+        <h1 class="card-title">{{ receta.titulo }}</h1>
+        <p class="card-text"><strong>Descripción:</strong> {{ receta.descripcion }}</p>
+        <p class="card-text"><strong>Ingredientes:</strong> {{ receta.ingredientes }}</p>
+        <p class="card-text"><strong>Preparación:</strong> {{ receta.preparacion }}</p>
+    </div>
+</div>
+
+<h2>Comentarios</h2>
+<ul class="list-group mb-4">
+    {% for comentario in comentarios %}
+    <li class="list-group-item">
+        <strong>{{ comentario.autor }}</strong>: {{ comentario.contenido }} 
+        <span class="text-muted">({{ comentario.fecha_creacion|date:"d/m/Y H:i" }})</span>
+    </li>
+    {% empty %}
+    <li class="list-group-item">No hay comentarios aún. ¡Sé el primero en comentar!</li>
+    {% endfor %}
+</ul>
+
+<h2>Agregar un Comentario</h2>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">Comentar</button>
+</form>
+<a href="{% url 'listar_recetas' %}" class="btn btn-secondary mt-4">Volver a la lista</a>
+{% endblock %}

@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1 class="text-center">Tips de Cocina</h1>
+<ul class="list-group">
+    {% for tip in tips %}
+    <li class="list-group-item">
+        <strong>{{ tip.titulo }}</strong>: {{ tip.contenido }}
+        <span class="badge bg-info">{{ tip.get_categoria_display }}</span>
+    </li>
+    {% empty %}
+    <p class="text-center">No hay tips disponibles.</p>
+    {% endfor %}
+</ul>
+{% endblock %}
