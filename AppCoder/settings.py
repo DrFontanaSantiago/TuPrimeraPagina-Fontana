@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'recetas',
     'accounts',
     'mensajeria',
+    'ckeditor',
 ]
 
 MIDDLEWARE = [
@@ -130,3 +131,12 @@ STATIC_URL = 'static/'
 
 # Ruta donde se guardarán los archivos estáticos recopilados
 STATIC_ROOT = BASE_DIR / 'staticfiles'
+
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar': 'full',
+        'height': 300,
+        'width': '100%',
+    },
+}
+

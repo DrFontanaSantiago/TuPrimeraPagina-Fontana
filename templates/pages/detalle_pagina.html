@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>{{ pagina.titulo }}</h2>
+<p>{{ pagina.contenido|safe }}</p>
+{% if pagina.imagen %}
+<img src="{{ pagina.imagen.url }}" width="300">
+{% endif %}
+{% if user == pagina.autor %}
+<a href="{% url 'editar_pagina' pagina.id %}" class="btn btn-warning">Editar</a>
+<a href="{% url 'eliminar_pagina' pagina.id %}" class="btn btn-danger">Eliminar</a>
+{% endif %}
+{% endblock %}

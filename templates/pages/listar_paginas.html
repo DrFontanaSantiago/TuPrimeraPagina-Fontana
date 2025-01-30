@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Publicaciones</h2>
+<a href="{% url 'agregar_pagina' %}" class="btn btn-success">Nueva Publicación</a>
+<ul>
+    {% for pagina in paginas %}
+    <li>
+        <a href="{% url 'detalle_pagina' pagina.id %}">{{ pagina.titulo }}</a> - {{ pagina.fecha_creacion|date:"d M Y" }}
+    </li>
+    {% empty %}
+    <li>No hay publicaciones aún.</li>
+    {% endfor %}
+</ul>
+{% endblock %}
