@@ -1,5 +1,5 @@
 from django import forms
-from .models import Receta, Comentario
+from .models import Receta, Comentario,  Bebida, Tip
 
 class RecetaForm(forms.ModelForm):
     class Meta:
@@ -10,3 +10,13 @@ class ComentarioForm(forms.ModelForm):
     class Meta:
         model = Comentario
         fields = ['autor', 'contenido']
+
+class BebidaForm(forms.ModelForm):
+    class Meta:
+        model = Bebida
+        fields = ['titulo', 'descripcion', 'categoria', 'imagen']  
+
+class TipForm(forms.ModelForm):
+    class Meta:
+        model = Tip
+        fields = ['titulo', 'contenido', 'categoria']  

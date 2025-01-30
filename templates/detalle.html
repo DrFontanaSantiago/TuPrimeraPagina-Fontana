@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>{{ objeto.titulo }}</h1>
+<p>{{ objeto.descripcion }}</p>
+{% if objeto.categoria %}
+    <p>Categoría: {{ objeto.categoria }}</p>
+{% endif %}
+{% if objeto.imagen %}
+    <img src="{{ objeto.imagen.url }}" alt="{{ objeto.titulo }}">
+{% endif %}
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h2>Mensajes Recibidos</h2>
+  <ul>
+    {% for mensaje in mensajes_recibidos %}
+      <li><strong>De:</strong> {{ mensaje.remitente }} - {{ mensaje.contenido }} ({{ mensaje.fecha_envio }})</li>
+    {% empty %}
+      <li>No tenes mensajes.</li>
+    {% endfor %}
+  </ul>
+
+  <h2>Mensajes Enviados</h2>
+  <ul>
+    {% for mensaje in mensajes_enviados %}
+      <li><strong>Para:</strong> {{ mensaje.destinatario }} - {{ mensaje.contenido }} ({{ mensaje.fecha_envio }})</li>
+    {% empty %}
+      <li>No has enviado mensajes.</li>
+    {% endfor %}
+  </ul>
+{% endblock %}

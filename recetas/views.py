@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404
-from .models import Receta, Categoria, Bebida, Tip
-from .forms import RecetaForm, ComentarioForm
 from django.db.models import Q
+from .models import Receta, Categoria, Bebida, Tip
+from .forms import RecetaForm, ComentarioForm, BebidaForm, TipForm
 
 def inicio(request):
     resultados_recetas = []
@@ -54,6 +54,17 @@ def detalle_receta(request, receta_id):
         'form': form
     })
 
+def detalle_tip(request, tip_id):
+    tip = get_object_or_404(Tip, id=tip_id)
+    return render(request, 'tips/detalle_tip.html', {'tip': tip})
+
+def detalle_bebida(request, bebida_id):
+    bebida = get_object_or_404(Bebida, id=bebida_id)
+    return render(request, 'bebidas/detalle_bebida.html', {'bebida': bebida})
+
+def exito(request):
+    return render(request, 'exito.html')
+
 def agregar_receta(request):
     if request.method == 'POST':
         form = RecetaForm(request.POST, request.FILES)
@@ -74,9 +85,34 @@ def listar_por_categoria(request, slug):
 
 def listar_bebidas(request):
     bebidas = Bebida.objects.all()
-    return render(request, 'recetas/listar_bebidas.html', {'bebidas': bebidas})
+    return render(request, 'bebidas/listar_bebidas.html', {'bebidas': bebidas})
+
+def agregar_bebida(request):
+    if request.method == 'POST':
+        form = BebidaForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return render(request, 'exito.html')  
+    else:
+        form = BebidaForm()
+    return render(request, 'bebidas/agregar_bebida.html', {'form': form})
 
 def listar_tips(request):
     tips = Tip.objects.all()
-    return render(request, 'recetas/listar_tips.html', {'tips': tips})
+    return render(request, 'tips/listar_tips.html', {'tips': tips})
 
+def agregar_tip(request):
+    if request.method == 'POST':
+        form = TipForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return render(request, 'exito.html') 
+    else:
+        form = TipForm()
+    return render(request, 'tips/agregar_tip.html', {'form': form})
+
+def about(request):
+    return render(request, 'about.html')
+
+def acerca_de(request):
+    return render(request, 'about.html')

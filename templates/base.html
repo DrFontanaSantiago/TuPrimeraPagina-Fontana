@@ -10,13 +10,39 @@
     <header class="bg-primary text-white text-center py-3">
         <h1>Recetario de Santi</h1>
         <nav class="d-flex justify-content-center mt-3">
-            <a href="/" class="btn btn-light me-2">Inicio</a>
-            <a href="/recetas/" class="btn btn-light me-2">Recetas</a>
-            <a href="/bebidas/" class="btn btn-light me-2">Bebidas</a>
-            <a href="/tips/" class="btn btn-light">Tips</a>
+            <a href="{% url 'inicio' %}" class="btn btn-light me-2">Inicio</a>
+            <a href="{% url 'listar_recetas' %}" class="btn btn-light me-2">Recetas</a>
+            <a href="{% url 'listar_bebidas' %}" class="btn btn-light me-2">Bebidas</a>
+            <a href="{% url 'listar_tips' %}" class="btn btn-light me-2">Tips</a>
+            <a href="{% url 'acerca_de' %}" class="btn btn-light me-2">Acerca de Mí</a>
+            <a href="{% url 'ver_mensajes' %}" class="btn btn-light me-2">Mensajes</a>
+    
+            {% if user.is_authenticated %}
+                <div class="dropdown me-2">
+                    <button class="btn btn-light dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                        Agregar
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="{% url 'agregar_receta' %}">Agregar Receta</a></li>
+                        <li><a class="dropdown-item" href="{% url 'agregar_bebida' %}">Agregar Bebida</a></li>
+                        <li><a class="dropdown-item" href="{% url 'agregar_tip' %}">Agregar Tip</a></li>
+                    </ul>
+                </div>
+                <div class="dropdown">
+                    <button class="btn btn-light dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                        {{ user.username }}
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="{% url 'perfil' %}">Perfil</a></li>
+                        <li><a class="dropdown-item" href="{% url 'logout' %}">Cerrar Sesión</a></li>
+                    </ul>
+                </div>
+            {% else %}
+                <a href="{% url 'login' %}" class="btn btn-success me-2">Iniciar Sesión</a>
+                <a href="{% url 'registro' %}" class="btn btn-warning">Registrarse</a>
+            {% endif %}
         </nav>
     </header>
-    
     <main class="container mt-4">
         {% block content %}
         {% endblock %}
